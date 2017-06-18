@@ -36,20 +36,20 @@ vector<int> seq( int from, int to )
 
 vector<int> seq( int count ) { return seq(1,count); }
 
-days days_in_year( unsigned short y )
+int days_in_year( unsigned short y )
 {
   auto next = sys_days{year{y+1}/1/1};
   auto curr = sys_days{year{ y }/1/1};
 
-  return next - curr;
+  return duration<int,hours::period>(next - curr)/ 24h;
 }
 
-days days_in_month( unsigned short y, unsigned char m )
+int days_in_month( unsigned short y, unsigned char m )
 {
   auto next = sys_days{year{y}/month{m}/last};
-  auto curr = sys_days{year{y}/month{m}/0};
+  auto curr = sys_days{year{y}/month{m}/1};
 
-  return next - curr;
+  return duration<int,hours::period>(next - curr)/ 24h + 1;
 }
 
 
